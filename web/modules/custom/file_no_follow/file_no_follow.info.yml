@@ -1,0 +1,5 @@
+name: 'File no follow'
+type: module
+description: 'Allow increase funcionality to file field type.'
+core: 8.x
+package: 'File'

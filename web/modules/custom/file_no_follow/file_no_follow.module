@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains file_no_follow.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function file_no_follow_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the file_no_follow module.
+    case 'help.page.file_no_follow':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Allow increase funcionality to file field type.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_field_info_alter().
+ */
+function file_no_follow_field_info_alter(&$info) {
+  if (isset($info['file'])) {
+    $info['file']['class'] = '\Drupal\file_no_follow\Plugin\Field\FieldType\FileNoFollowFieldType';
+  }
+}

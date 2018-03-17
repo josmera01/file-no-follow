@@ -5,7 +5,7 @@ namespace Drupal\file_no_follow\Plugin\Field\FieldFormatter;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\FormatterBase;
+use Drupal\file\Plugin\Field\FieldFormatter\GenericFileFormatter;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -19,34 +19,20 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class FileNoFollowFieldFormatter extends FormatterBase {
+class FileNoFollowFieldFormatter extends GenericFileFormatter {
 
   /**
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $elements = [];
+    $elements = parent::viewElements($items, $langcode);
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = ['#markup' => $this->viewValue($item)];
+      dump($item);
+      $elements[$delta]['#options']['attributes']['rel'] = $item['#values']['options'];
+      $elements[$delta]['#theme'] = 'file_link_no_follow';
     }
 
     return $elements;
   }
-
-  /**
-   * Generate the output appropriate for one field item.
-   *
-   * @param \Drupal\Core\Field\FieldItemInterface $item
-   *   One field item.
-   *
-   * @return string
-   *   The textual output generated.
-   */
-  protected function viewValue(FieldItemInterface $item) {
-    // The text value has no text format assigned to it, so the user input
-    // should equal the output, including newlines.
-    return nl2br(Html::escape($item->value));
-  }
-
 }

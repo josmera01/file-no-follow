@@ -24,10 +24,10 @@ class FileNoFollowFieldWidget extends FileWidget {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    $element['options']['no_follow'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('No follow'),
-      '#default_value' => isset($items[$delta]->options['no_follow']) ? $items[$delta]->options['no_follow'] : NULL,
+    $element['options']['rel'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Tag rel'),
+      '#default_value' => isset($items[$delta]->options['rel']) ? $items[$delta]->options['rel'] : NULL,
     ];
 
     return $element;

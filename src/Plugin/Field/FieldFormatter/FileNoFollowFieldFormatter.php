@@ -28,8 +28,7 @@ class FileNoFollowFieldFormatter extends GenericFileFormatter {
     $elements = parent::viewElements($items, $langcode);
 
     foreach ($items as $delta => $item) {
-      dump($item);
-      $elements[$delta]['#options']['attributes']['rel'] = $item['#values']['options'];
+      $elements[$delta]['#options'] = $item->options;
       $elements[$delta]['#theme'] = 'file_link_no_follow';
     }
 

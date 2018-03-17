@@ -69,8 +69,13 @@ function file_no_follow_theme() {
 function  template_preprocess_file_link_no_follow(&$variables) {
 
   $file = $variables['file'];
-
-  $options = isset($variables['options']) ? $variables['options'] : [];
+  $options = array();
+  // Get the variables options.
+  if (isset($variables['options'])) {
+    foreach ($variables['options'] as $key => $value) {
+      $options['attributes'][$key] = $value;
+    }
+  }
   $file_entity = $file instanceof File ? $file : File::load($file->fid);
 
   $url = file_create_url($file_entity->getFileUri());

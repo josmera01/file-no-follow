@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\file_no_follow\Plugin\Field\FieldFormatter;
+namespace Drupal\file_attributes\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemInterface;
@@ -9,17 +9,17 @@ use Drupal\file\Plugin\Field\FieldFormatter\GenericFileFormatter;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Plugin implementation of the 'file_no_follow' formatter.
+ * Plugin implementation of the 'file_attributes' formatter.
  *
  * @FieldFormatter(
- *   id = "file_no_follow",
- *   label = @Translation("File no follow"),
+ *   id = "file_attributes",
+ *   label = @Translation("File attributes"),
  *   field_types = {
  *     "file"
  *   }
  * )
  */
-class FileNoFollowFieldFormatter extends GenericFileFormatter {
+class FileAttributesFieldFormatter extends GenericFileFormatter {
 
   /**
    * {@inheritdoc}
@@ -29,7 +29,7 @@ class FileNoFollowFieldFormatter extends GenericFileFormatter {
 
     foreach ($items as $delta => $item) {
       $elements[$delta]['#options'] = $item->options;
-      $elements[$delta]['#theme'] = 'file_link_no_follow';
+      $elements[$delta]['#theme'] = 'file_attributes_link';
     }
 
     return $elements;

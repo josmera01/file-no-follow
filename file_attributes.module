@@ -6,7 +6,7 @@ use Drupal\Core\Url;
 
 /**
  * @file
- * Contains file_no_follow.module.
+ * Contains file_attributes.module.
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -14,10 +14,10 @@ use Drupal\Core\Routing\RouteMatchInterface;
 /**
  * Implements hook_help().
  */
-function file_no_follow_help($route_name, RouteMatchInterface $route_match) {
+function file_attributes_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
-    // Main module help for the file_no_follow module.
-    case 'help.page.file_no_follow':
+    // Main module help for the file_attributes module.
+    case 'help.page.file_attributes':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('Allow increase funcionality to file field type.') . '</p>';
@@ -30,18 +30,18 @@ function file_no_follow_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_field_info_alter().
  */
-function file_no_follow_field_info_alter(&$info) {
+function file_attributes_field_info_alter(&$info) {
   if (isset($info['file'])) {
-    $info['file']['class'] = '\Drupal\file_no_follow\Plugin\Field\FieldType\FileNoFollowFieldType';
+    $info['file']['class'] = '\Drupal\file_attributes\Plugin\Field\FieldType\FileAttributesFieldType';
   }
 }
 
 /**
  * Implements hook_theme().
  */
-function file_no_follow_theme() {
+function file_attributes_theme() {
   return array(
-    'file_link_no_follow' => [
+    'file_attributes_link' => [
       'variables' => [
         'file' => NULL,
         'description' => NULL,
@@ -55,7 +55,7 @@ function file_no_follow_theme() {
 /**
  * Prepares variables for file link templates.
  *
- * Default template: file-link-no-follow.html.twig.
+ * Default template: file-attributes-link.html.twig.
  *
  * @param array $variables
  *   An associative array containing:
@@ -66,16 +66,11 @@ function file_no_follow_theme() {
  *   - options: The options for render to link.
  *   - attributes: An associative array of attributes to be placed in the a tag.
  */
-function  template_preprocess_file_link_no_follow(&$variables) {
+function  template_preprocess_file_attributes_link(&$variables) {
 
   $file = $variables['file'];
-  $options = array();
-  // Get the variables options.
-  if (isset($variables['options'])) {
-    foreach ($variables['options'] as $key => $value) {
-      $options['attributes'][$key] = $value;
-    }
-  }
+
+  $options = isset($variables['options']) ? $variables['options'] : [];
   $file_entity = $file instanceof File ? $file : File::load($file->fid);
 
   $url = file_create_url($file_entity->getFileUri());

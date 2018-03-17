@@ -1,23 +1,23 @@
 <?php
 
-namespace Drupal\file_no_follow\Plugin\Field\FieldWidget;
+namespace Drupal\file_attributes\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Plugin\Field\FieldWidget\FileWidget;
 
 /**
- * Plugin implementation of the 'file_no_follow' widget.
+ * Plugin implementation of the 'file_attributes' widget.
  *
  * @FieldWidget(
- *   id = "file_no_follow",
- *   label = @Translation("File no follow"),
+ *   id = "file_attributes",
+ *   label = @Translation("File attributes"),
  *   field_types = {
  *     "file"
  *   }
  * )
  */
-class FileNoFollowFieldWidget extends FileWidget {
+class FileAttributesFieldWidget extends FileWidget {
 
   /**
    * {@inheritdoc}

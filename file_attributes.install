@@ -3,7 +3,7 @@
 /**
  * Implements hook_install().
  */
-function file_no_follow_install() {
+function file_attributes_install() {
   // Get services.
   $entity_field_manager = \Drupal::service('entity_field.manager');
   $schema = \Drupal::database()->schema();

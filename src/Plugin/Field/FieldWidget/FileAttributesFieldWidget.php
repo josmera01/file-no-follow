@@ -26,7 +26,7 @@ class FileAttributesFieldWidget extends FileWidget {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
     $element['options']['rel'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Tag rel'),
+      '#title' => $this->t('Rel tag'),
       '#default_value' => isset($items[$delta]->options['rel']) ? $items[$delta]->options['rel'] : NULL,
     ];
 
